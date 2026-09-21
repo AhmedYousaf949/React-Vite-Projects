@@ -1,29 +1,20 @@
-function TodoItem({ task, onToggle, onDelete }) {
+function TodoItem({ task, onToggle }) {
   return (
     <li className="todo-item">
-
       <div
         className="task-content"
         onClick={() => onToggle(task.id)}
       >
-        <h2 className={task.completed ? "completed" : ""}>
+        <h2>
           {task.title}
         </h2>
-
-        <p className={task.completed ? "completed" : ""}>
-          {task.description}
-        </p>
+        {task.isOpen && (
+          <p>
+            {task.description}
+          </p>
+        )}
       </div>
-
-      <button
-        className="delete-button"
-        onClick={() => onDelete(task.id)}
-      >
-        Delete
-      </button>
-
     </li>
   );
 }
-
 export default TodoItem;
