@@ -1,8 +1,20 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 function App() {
   const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+  fetch("https://jsonplaceholder.typicode.com/todos")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
   const addTask = (title, description) => {
     const newTask = {
       id: Math.random(),
