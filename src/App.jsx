@@ -9,7 +9,16 @@ function App() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      const newTasks = data.map((task) => {
+  return {
+    id: task.id,
+    title: task.title,
+    description: "This task came from the API.",
+    isOpen: false,
+  };
+});
+
+setTasks(newTasks);
     })
     .catch((error) => {
       console.log(error);
