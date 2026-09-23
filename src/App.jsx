@@ -46,6 +46,21 @@ setTasks(newTasks);
       })
     );
   };
+  const deleteTask = (id) => {
+  fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        setTasks(
+          tasks.filter((task) => task.id !== id)
+        );
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
   return (
     <div className="app">
       <div className="todo-container">
@@ -56,6 +71,7 @@ setTasks(newTasks);
         <TodoList
           tasks={tasks}
           onToggle={toggleTask}
+          onDelete={deleteTask}
         />
       </div>
     </div>

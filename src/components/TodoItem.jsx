@@ -1,4 +1,4 @@
-function TodoItem({ task, onToggle }) {
+function TodoItem({ task, onToggle, onDelete }) {
   return (
     <li className="todo-item">
       <div
@@ -14,6 +14,12 @@ function TodoItem({ task, onToggle }) {
           </p>
         )}
       </div>
+      <button
+        className="delete-button"
+        onClick={() => onDelete(task.id)}
+      >
+        Delete
+      </button>
     </li>
   );
 }
