@@ -1,4 +1,4 @@
-function TodoItem({ task, onToggle, onDelete }) {
+function TodoItem({ task, onToggle, onDelete, onEdit }) {
   return (
     <li className="todo-item">
       <div
@@ -19,6 +19,12 @@ function TodoItem({ task, onToggle, onDelete }) {
         onClick={() => onDelete(task.id)}
       >
         Delete
+      </button>
+      <button
+        className="edit-button"
+        onClick={() => onEdit(task.id)}
+      >
+        Edit
       </button>
     </li>
   );

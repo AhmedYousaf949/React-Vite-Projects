@@ -61,6 +61,9 @@ setTasks(newTasks);
       console.log(error);
     });
 };
+const editTask = (id) => {
+  console.log("Edit task:", id);
+};
   return (
     <div className="app">
       <div className="todo-container">
@@ -72,6 +75,7 @@ setTasks(newTasks);
           tasks={tasks}
           onToggle={toggleTask}
           onDelete={deleteTask}
+          onEdit={editTask}
         />
       </div>
     </div>
