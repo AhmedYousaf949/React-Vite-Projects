@@ -51,19 +51,35 @@ setTasks(newTasks);
     );
   };
   const deleteTask = (id) => {
-  fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (response.ok) {
-        setTasks(
-          tasks.filter((task) => task.id !== id)
-        );
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to undo this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            setTasks(
+              tasks.filter((task) => task.id !== id)
+            );
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your task has been deleted.",
+              icon: "success",
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  });
 };
 const editTask = (id) => {
   const taskToEdit = tasks.find((task) => task.id === id);
@@ -97,19 +113,24 @@ const saveEdit = () => {
       return response.json();
     })
     .then((data) => {
-  console.log("Updated task:", data);
-  setTasks(
-    tasks.map((task) => {
-      if (task.id === editingId) {
-        return data;
-      }
-      return task;
+      console.log("Updated task:", data);
+      setTasks(
+        tasks.map((task) => {
+          if (task.id === editingId) {
+            return data;
+          }
+          return task;
+        })
+      );
+      setEditingId(null);
+      setEditTitle("");
+      setEditDescription("");
+      Swal.fire({
+        title: "Updated!",
+        text: "Your task has been updated successfully.",
+        icon: "success",
+      });
     })
-  );
-  setEditingId(null);
-  setEditTitle("");
-  setEditDescription("");
-})
     .catch((error) => {
       console.log(error);
     });
