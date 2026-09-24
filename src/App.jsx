@@ -79,9 +79,28 @@ const cancelEdit = () => {
   setEditDescription("");
 };
 const saveEdit = () => {
-  console.log("Saving:", editingId);
-  console.log("New title:", editTitle);
-  console.log("New description:", editDescription);
+  const updatedTask = {
+    id: editingId,
+    title: editTitle,
+    description: editDescription,
+    isOpen: false,
+  };
+  fetch(`https://jsonplaceholder.typicode.com/todos/${editingId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedTask),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Updated task:", data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
   return (
     <div className="app">
