@@ -193,3 +193,79 @@ input {
   text-decoration: line-through;
   color: #a1a1aa;
 }
+/* Edit button */
+
+.edit-button {
+  border: none;
+  background: #6366f1;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background: #4f46e5;
+}
+
+
+/* Edit form */
+
+.edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  outline: none;
+  font: inherit;
+}
+
+.edit-form textarea {
+  resize: vertical;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+  border-color: #6366f1;
+}
+
+
+/* Save button */
+
+.save-button {
+  border: none;
+  background: #0f8f3e;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background: #16a34a;
+}
+
+
+/* Cancel button */
+
+.cancel-button {
+  border: none;
+  background: #71717a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #52525b;
+}

@@ -25,10 +25,10 @@ function TodoItem({ task, onToggle, onDelete, onEdit, editingId, editTitle, setE
           value={editDescription}
           onChange={(e) => setEditDescription(e.target.value)}
         />
-        <button onClick={onSaveEdit}>
+        <button className="save-button" onClick={onSaveEdit}>
           Save
         </button>
-        <button onClick={onCancelEdit}>
+        <button className="cancel-button" onClick={onCancelEdit}>
           Cancel
         </button>
       </div>
