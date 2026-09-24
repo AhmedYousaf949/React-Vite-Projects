@@ -96,8 +96,19 @@ const saveEdit = () => {
       return response.json();
     })
     .then((data) => {
-      console.log("Updated task:", data);
+  console.log("Updated task:", data);
+  setTasks(
+    tasks.map((task) => {
+      if (task.id === editingId) {
+        return data;
+      }
+      return task;
     })
+  );
+  setEditingId(null);
+  setEditTitle("");
+  setEditDescription("");
+})
     .catch((error) => {
       console.log(error);
     });
