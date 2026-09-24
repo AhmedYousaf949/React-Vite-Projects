@@ -73,6 +73,16 @@ const editTask = (id) => {
   setEditTitle(taskToEdit.title);
   setEditDescription(taskToEdit.description);
 };
+const cancelEdit = () => {
+  setEditingId(null);
+  setEditTitle("");
+  setEditDescription("");
+};
+const saveEdit = () => {
+  console.log("Saving:", editingId);
+  console.log("New title:", editTitle);
+  console.log("New description:", editDescription);
+};
   return (
     <div className="app">
       <div className="todo-container">
@@ -90,6 +100,8 @@ const editTask = (id) => {
           setEditTitle={setEditTitle}
           editDescription={editDescription}
           setEditDescription={setEditDescription}
+          onCancelEdit={cancelEdit}
+          onSaveEdit={saveEdit}
         />
       </div>
     </div>

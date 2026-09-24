@@ -1,4 +1,4 @@
-function TodoItem({ task, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription }) {
+function TodoItem({ task, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription, onCancelEdit, onSaveEdit }) {
   return (
     <li className="todo-item">
       <div
@@ -25,8 +25,12 @@ function TodoItem({ task, onToggle, onDelete, onEdit, editingId, editTitle, setE
           value={editDescription}
           onChange={(e) => setEditDescription(e.target.value)}
         />
-        <button>Save</button>
-        <button>Cancel</button>
+        <button onClick={onSaveEdit}>
+          Save
+        </button>
+        <button onClick={onCancelEdit}>
+          Cancel
+        </button>
       </div>
 )}
       <button

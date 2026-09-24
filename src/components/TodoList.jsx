@@ -1,5 +1,5 @@
 import TodoItem from "./TodoItem";
-function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription }) {
+function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription, onCancelEdit, onSaveEdit }) {
   if (tasks.length === 0) {
     return (
       <p className="empty-message">
@@ -21,6 +21,8 @@ function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editTitle, set
           setEditTitle={setEditTitle}
           editDescription={editDescription}
           setEditDescription={setEditDescription}
+          onCancelEdit={onCancelEdit}
+          onSaveEdit={onSaveEdit}
         />
       ))}
 
