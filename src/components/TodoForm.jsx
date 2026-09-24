@@ -13,13 +13,19 @@ function TodoForm({ onAdd }) {
   };
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
-      <input type="text" placeholder="Enter task title" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Enter task title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
       <textarea
-        placeholder="Enter task description" value={description} onChange={(e) => setDescription(e.target.value)} rows="4">
-      </textarea>
-      <button type="submit">
-        Add Task
-      </button>
+        placeholder="Enter task description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        rows="4"
+      ></textarea>
+      <button type="submit">Add Task</button>
     </form>
   );
 }

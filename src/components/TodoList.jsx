@@ -1,11 +1,19 @@
 import TodoItem from "./TodoItem";
-function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription, onCancelEdit, onSaveEdit }) {
+function TodoList({
+  tasks,
+  onToggle,
+  onDelete,
+  onEdit,
+  editingId,
+  editTitle,
+  setEditTitle,
+  editDescription,
+  setEditDescription,
+  onCancelEdit,
+  onSaveEdit,
+}) {
   if (tasks.length === 0) {
-    return (
-      <p className="empty-message">
-        No tasks yet.
-      </p>
-    );
+    return <p className="empty-message">No tasks yet.</p>;
   }
   return (
     <ul className="todo-list">
@@ -25,7 +33,6 @@ function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editTitle, set
           onSaveEdit={onSaveEdit}
         />
       ))}
-
     </ul>
   );
 }

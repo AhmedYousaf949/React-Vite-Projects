@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -8,26 +8,26 @@ function App() {
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
   useEffect(() => {
-  fetch("https://jsonplaceholder.typicode.com/todos")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      const newTasks = data.map((task) => {
-  return {
-    id: task.id,
-    title: task.title,
-    description: "This task came from the API.",
-    isOpen: false,
-  };
-});
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const newTasks = data.map((task) => {
+          return {
+            id: task.id,
+            title: task.title,
+            description: "This task came from the API.",
+            isOpen: false,
+          };
+        });
 
-setTasks(newTasks);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}, []);
+        setTasks(newTasks);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   const addTask = (title, description) => {
     const newTask = {
       id: Math.random(),
@@ -47,94 +47,92 @@ setTasks(newTasks);
           };
         }
         return task;
-      })
+      }),
     );
   };
   const deleteTask = (id) => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to undo this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "Cancel",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            setTasks(
-              tasks.filter((task) => task.id !== id)
-            );
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your task has been deleted.",
-              icon: "success",
-            });
-          }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+          method: "DELETE",
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  });
-};
-const editTask = (id) => {
-  const taskToEdit = tasks.find((task) => task.id === id);
-  if (!taskToEdit) {
-    return;
-  }
-  setEditingId(id);
-  setEditTitle(taskToEdit.title);
-  setEditDescription(taskToEdit.description);
-};
-const cancelEdit = () => {
-  setEditingId(null);
-  setEditTitle("");
-  setEditDescription("");
-};
-const saveEdit = () => {
-  const updatedTask = {
-    id: editingId,
-    title: editTitle,
-    description: editDescription,
-    isOpen: false,
-  };
-  fetch(`https://jsonplaceholder.typicode.com/todos/${editingId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedTask),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Updated task:", data);
-      setTasks(
-        tasks.map((task) => {
-          if (task.id === editingId) {
-            return data;
-          }
-          return task;
-        })
-      );
-      setEditingId(null);
-      setEditTitle("");
-      setEditDescription("");
-      Swal.fire({
-        title: "Updated!",
-        text: "Your task has been updated successfully.",
-        icon: "success",
-      });
-    })
-    .catch((error) => {
-      console.log(error);
+          .then((response) => {
+            if (response.ok) {
+              setTasks(tasks.filter((task) => task.id !== id));
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your task has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     });
-};
+  };
+  const editTask = (id) => {
+    const taskToEdit = tasks.find((task) => task.id === id);
+    if (!taskToEdit) {
+      return;
+    }
+    setEditingId(id);
+    setEditTitle(taskToEdit.title);
+    setEditDescription(taskToEdit.description);
+  };
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditTitle("");
+    setEditDescription("");
+  };
+  const saveEdit = () => {
+    const updatedTask = {
+      id: editingId,
+      title: editTitle,
+      description: editDescription,
+      isOpen: false,
+    };
+    fetch(`https://jsonplaceholder.typicode.com/todos/${editingId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Updated task:", data);
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === editingId) {
+              return data;
+            }
+            return task;
+          }),
+        );
+        setEditingId(null);
+        setEditTitle("");
+        setEditDescription("");
+        Swal.fire({
+          title: "Updated!",
+          text: "Your task has been updated successfully.",
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="app">
       <div className="todo-container">
