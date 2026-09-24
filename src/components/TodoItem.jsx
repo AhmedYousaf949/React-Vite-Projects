@@ -1,4 +1,4 @@
-function TodoItem({ task, onToggle, onDelete, onEdit }) {
+function TodoItem({ task, onToggle, onDelete, onEdit, editingId, editTitle, setEditTitle, editDescription, setEditDescription }) {
   return (
     <li className="todo-item">
       <div
@@ -14,6 +14,21 @@ function TodoItem({ task, onToggle, onDelete, onEdit }) {
           </p>
         )}
       </div>
+      {task.id === editingId && (
+      <div className="edit-form">
+        <input  
+          type="text"
+          value={editTitle}
+          onChange={(e) => setEditTitle(e.target.value)}
+        />
+        <textarea
+          value={editDescription}
+          onChange={(e) => setEditDescription(e.target.value)}
+        />
+        <button>Save</button>
+        <button>Cancel</button>
+      </div>
+)}
       <button
         className="delete-button"
         onClick={() => onDelete(task.id)}

@@ -3,6 +3,9 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDescription, setEditDescription] = useState("");
   useEffect(() => {
   fetch("https://jsonplaceholder.typicode.com/todos")
     .then((response) => {
@@ -62,7 +65,13 @@ setTasks(newTasks);
     });
 };
 const editTask = (id) => {
-  console.log("Edit task:", id);
+  const taskToEdit = tasks.find((task) => task.id === id);
+  if (!taskToEdit) {
+    return;
+  }
+  setEditingId(id);
+  setEditTitle(taskToEdit.title);
+  setEditDescription(taskToEdit.description);
 };
   return (
     <div className="app">
@@ -76,6 +85,11 @@ const editTask = (id) => {
           onToggle={toggleTask}
           onDelete={deleteTask}
           onEdit={editTask}
+          editingId={editingId}
+          editTitle={editTitle}
+          setEditTitle={setEditTitle}
+          editDescription={editDescription}
+          setEditDescription={setEditDescription}
         />
       </div>
     </div>
